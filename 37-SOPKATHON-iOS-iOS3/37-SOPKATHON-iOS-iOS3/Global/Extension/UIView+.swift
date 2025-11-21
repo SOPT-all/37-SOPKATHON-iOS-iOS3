@@ -1,6 +1,6 @@
 //
 //  UIView+.swift
-//  37-COLLABORATION-UNIQLO
+//  37-SOPKATHON-iOS-iOS3
 //
 //  Created by 이나연 on 11/18/25.
 //
