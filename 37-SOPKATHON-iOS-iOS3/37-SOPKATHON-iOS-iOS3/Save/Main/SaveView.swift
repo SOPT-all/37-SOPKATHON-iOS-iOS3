@@ -26,6 +26,7 @@ class SaveView: BaseView {
     
     override func setStyle() {
         titleLabel.do {
+            $0.font = .pretendard(.head_b_22)
             $0.text = "마이 보관함"
         }
         
