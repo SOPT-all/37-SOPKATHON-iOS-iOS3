@@ -8,72 +8,99 @@
 import UIKit
 
 final class HomeView: BaseView {
+    private let backgroundView = UIImageView()
     private let titleImageView = UIImageView()
     private let saveStackView = UIStackView()
     private let saveImageView = UIImageView()
     private let saveTitleLabel = UILabel()
     private let dialogueImageView = UIImageView()
-    lazy var charcterButton = UIButton()
+    private let characterImageView = UIImageView()
     
     override func setUI() {
         addSubviews(
+            backgroundView,
             titleImageView,
             saveStackView,
             dialogueImageView,
-            charcterButton
+            characterImageView
         )
         
         saveStackView.addArrangedSubviews(saveImageView, saveTitleLabel)
     }
     
     override func setStyle() {
+        backgroundView.do {
+            $0.image = .imgHome
+            $0.contentMode = .scaleAspectFill
+        }
+        
+        titleImageView.do {
+            $0.image = .logo
+        }
+        
         saveStackView.do {
             $0.axis = .vertical
-            $0.spacing = 2
-            $0.backgroundColor = .blue
+        }
+        
+        saveImageView.do {
+            $0.image = .homeImgEcho
         }
         
         saveTitleLabel.do {
             $0.text = "보관함"
+            $0.textColor = .white
+            $0.textAlignment = .center
+            $0.font = .pretendard(.head_b_14)
         }
         
         dialogueImageView.do {
-            $0.backgroundColor = .green
+            $0.image = .homeDialogue
+            $0.contentMode = .scaleAspectFit
         }
         
-        charcterButton.do {
-            $0.backgroundColor = .red
+        characterImageView.do {
+            $0.image = .elf
+            $0.contentMode = .scaleAspectFit
         }
     }
     
     override func setLayout() {
+        backgroundView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
         titleImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(20)
-            $0.leading.equalToSuperview().inset(27)
-            $0.width.equalTo(96)
-            $0.height.equalTo(48)
+            $0.top.equalToSuperview().inset(70)
+            $0.leading.equalToSuperview().inset(16)
+            $0.width.equalTo(206)
+            $0.height.equalTo(84)
         }
         
         saveStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(17)
+            $0.top.equalToSuperview().inset(77)
             $0.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(71)
         }
         
         saveImageView.snp.makeConstraints {
-            $0.width.height.equalTo(48)
+            $0.width.equalTo(50)
+            $0.height.equalTo(51)
         }
         
-        charcterButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(122)
-            $0.trailing.equalToSuperview().inset(82)
-            $0.height.equalTo(158)
+        characterImageView.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(83)
+            $0.trailing.equalToSuperview().inset(23)
+            $0.width.equalTo(142)
+            $0.height.equalTo(274)
         }
         
         dialogueImageView.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(228)
-            $0.leading.equalToSuperview().inset(59)
+            $0.bottom.equalToSuperview().inset(264)
+            $0.leading.equalToSuperview().inset(53)
         }
         
     }
+}
+
+#Preview {
+    HomeView()
 }

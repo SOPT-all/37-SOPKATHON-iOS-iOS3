@@ -20,14 +20,14 @@ final class HomeViewController: BaseViewController {
     }
     
     override func setAddTarget() {
-        rootView.charcterButton.addTarget(self, action: #selector(charcterDidTap), for: .touchUpInside)
+//        rootView.charcterButton.addTarget(self, action: #selector(charcterDidTap), for: .touchUpInside)
     }
 }
 
 extension HomeViewController {
     @objc
     private func charcterDidTap() {
-        let viewControlelr = WriteViewController()
+        let viewControlelr = SelectViewController()
         self.navigationController?.pushViewController(viewControlelr, animated: true)
     }
 }
