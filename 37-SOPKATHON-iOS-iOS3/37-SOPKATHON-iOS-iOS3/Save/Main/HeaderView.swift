@@ -73,8 +73,8 @@ final class SaveHeaderView: UIView {
         }
         
         profileImageView.snp.makeConstraints {
-            $0.height.equalTo(40)
-            $0.width.equalTo(36)
+            $0.height.equalTo(50)
+            $0.width.equalTo(40)
         }
         
         titleLabel.snp.makeConstraints {
