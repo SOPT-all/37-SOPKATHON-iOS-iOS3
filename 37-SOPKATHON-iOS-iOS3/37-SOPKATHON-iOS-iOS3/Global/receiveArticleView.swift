@@ -110,7 +110,3 @@ class ReceiveArticleView: BaseView {
         }
     }
 }
-
-#Preview {
-    ReceiveArticleView()
-}
