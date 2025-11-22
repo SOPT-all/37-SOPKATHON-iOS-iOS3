@@ -1,3 +1,10 @@
+//
+//  EmotionCell.swift
+//  37-SOPKATHON-iOS-iOS3
+//
+//  Created by 한현서 on 11/22/25.
+//
+
 import UIKit
 import SnapKit
 import Then
@@ -56,7 +63,7 @@ final class EmotionCell: UICollectionViewCell {
     
     func configure(with emotion: EmotionModel) {
         // imageName 속성의 이모지 문자열을 UILabel의 text로 할당
-        emotionLabel.text = emotion.imageName
+        emotionLabel.text = emotion.emoji
         isSelected = false // 선택 상태 초기화
     }
 }

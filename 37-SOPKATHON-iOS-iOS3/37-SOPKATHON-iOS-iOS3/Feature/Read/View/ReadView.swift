@@ -1,3 +1,10 @@
+//
+//  ReadView.swift
+//  37-SOPKATHON-iOS-iOS3
+//
+//  Created by 한현서 on 11/22/25.
+//
+
 import UIKit
 import SnapKit
 import Then
@@ -13,6 +20,8 @@ final class ReadView: UIView {
         $0.layer.borderColor = UIColor.grey200.cgColor
         $0.backgroundColor = .white
         $0.isEditable = false
+        $0.isSelectable = false
+        $0.isScrollEnabled = false
         $0.font = UIFont.systemFont(ofSize: 16)
         $0.textContainerInset = UIEdgeInsets(top: 15, left: 10, bottom: 15, right: 10)
         $0.textColor = .label

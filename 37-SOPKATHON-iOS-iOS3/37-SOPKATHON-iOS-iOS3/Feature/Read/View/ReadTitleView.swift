@@ -19,6 +19,8 @@ final class ReadTitleView: UIView {
         $0.layer.borderColor = UIColor.grey200.cgColor
         $0.backgroundColor = .grey100
         $0.isEditable = false
+        $0.isSelectable = false
+        $0.isScrollEnabled = false
         $0.font = UIFont.systemFont(ofSize: 16)
         $0.textContainerInset = UIEdgeInsets(top: 15, left: 10, bottom: 15, right: 10)
         $0.textColor = .label
