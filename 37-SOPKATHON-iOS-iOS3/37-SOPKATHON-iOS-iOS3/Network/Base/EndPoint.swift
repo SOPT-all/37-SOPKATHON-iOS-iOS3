@@ -7,8 +7,6 @@
 
 import Foundation
 
-// TODO: 예시 엔드포인트입니다. 나중에 명세서 나오면 수정하기
-
 enum EndPoint {
     case diarys // 일기 작성
     case diarysEmotion(Int) // 이모지를 눌러 카운트 증가
