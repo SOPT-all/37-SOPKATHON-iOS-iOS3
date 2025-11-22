@@ -23,6 +23,11 @@ final class HomeViewController: BaseViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(charcterDidTap))
         rootView.characterImageView.isUserInteractionEnabled = true
         rootView.characterImageView.addGestureRecognizer(tap)
+        
+        let saveImageTap = UITapGestureRecognizer(target: self, action: #selector(saveImageDidTap))
+        rootView.saveImageView.isUserInteractionEnabled = true
+        rootView.saveImageView.addGestureRecognizer(saveImageTap)
+        
     }
 }
 
@@ -30,6 +35,11 @@ extension HomeViewController {
     @objc
     private func charcterDidTap() {
         let viewControlelr = SelectViewController()
+        self.navigationController?.pushViewController(viewControlelr, animated: true)
+    }
+    @objc
+    private func saveImageDidTap() {
+        let viewControlelr = SaveViewController()
         self.navigationController?.pushViewController(viewControlelr, animated: true)
     }
 }

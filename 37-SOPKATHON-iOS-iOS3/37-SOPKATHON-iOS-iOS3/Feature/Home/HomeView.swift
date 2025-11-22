@@ -11,9 +11,9 @@ final class HomeView: BaseView {
     private let backgroundView = UIImageView()
     private let titleImageView = UIImageView()
     private let saveStackView = UIStackView()
-    private let saveImageView = UIImageView()
     private let saveTitleLabel = UILabel()
     private let dialogueImageView = UIImageView()
+    let saveImageView = UIImageView()
     let characterImageView = UIImageView()
     
     override func setUI() {
