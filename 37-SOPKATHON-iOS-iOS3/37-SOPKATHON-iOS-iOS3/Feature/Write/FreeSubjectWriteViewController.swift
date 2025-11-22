@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class WriteViewController: BaseViewController {
-    private let rootView = WriteView()
+final class FreeSubjectWriteViewController: BaseViewController {
+    private let rootView = FreeSubjectWriteView()
     
     override func loadView() {
         view = rootView
@@ -17,8 +17,13 @@ final class WriteViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.hidesBackButton = true
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
     
     
