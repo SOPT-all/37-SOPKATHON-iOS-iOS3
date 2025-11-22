@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 import Then
 
 protocol EmotionViewDelegate: AnyObject {
@@ -37,8 +38,11 @@ final class EmotionView: UICollectionView {
             $0.dataSource = self
             $0.delegate = self
             $0.register(EmotionCell.self, forCellWithReuseIdentifier: EmotionCell.reuseIdentifier)
-            $0.backgroundColor = .clear
-            $0.showsHorizontalScrollIndicator = false
+            $0.backgroundColor = .grey100
+            $0.layer.borderColor = UIColor.grey200.cgColor
+            $0.layer.borderWidth = 1.0
+            $0.layer.cornerRadius = 25
+            $0.clipsToBounds = true
             $0.showsVerticalScrollIndicator = false
         }
     }
@@ -54,7 +58,6 @@ final class EmotionView: UICollectionView {
             $0.scrollDirection = .horizontal
             $0.minimumInteritemSpacing = 10
             $0.minimumLineSpacing = 10
-            $0.sectionInset = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
         }
         return layout
     }
@@ -81,30 +84,40 @@ extension EmotionView: UICollectionViewDataSource {
     }
 }
 
-// MARK: - UICollectionViewDelegateFlowLayout
 
 extension EmotionView: UICollectionViewDelegateFlowLayout {
     
-    // 셀의 크기 설정
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        // 크기를 44 x 44로 고정
+        let width: CGFloat = 44
+        let height: CGFloat = 44
+        
+        return CGSize(width: width, height: height)
+    }
+
+    // 가운데 정렬
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
         guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else {
             return .zero
         }
         
-        let sectionInsets = layout.sectionInset
-        let interitemSpacing = layout.minimumInteritemSpacing
+        let cellCount: CGFloat = 5
+        let cellWidth: CGFloat = 44
+        let itemSpacing: CGFloat = layout.minimumInteritemSpacing
         
-        let totalWidth = collectionView.bounds.width
+        let totalCellsWidth = (cellWidth * cellCount)
+        let totalSpacingWidth = (itemSpacing * (cellCount - 1))
+        let totalItemsWidth = totalCellsWidth + totalSpacingWidth
         
-        let numberOfItemsPerRow: CGFloat = 5
+        let remainingSpace = collectionView.frame.width - totalItemsWidth
         
-        let totalSpacing = sectionInsets.left + sectionInsets.right + (interitemSpacing * (numberOfItemsPerRow - 1))
+        let sideInset = max(0, remainingSpace / 2.0)
         
-        let width = floor((totalWidth - totalSpacing) / numberOfItemsPerRow)
+        let topInset: CGFloat = 10
+        let bottomInset: CGFloat = 10
         
-        let height: CGFloat = 56 // 높이 고정값
-        
-        return CGSize(width: width, height: height)
+        return UIEdgeInsets(top: topInset, left: sideInset, bottom: bottomInset, right: sideInset)
     }
 }

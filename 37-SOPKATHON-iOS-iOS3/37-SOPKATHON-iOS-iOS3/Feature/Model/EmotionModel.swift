@@ -8,15 +8,15 @@
 import UIKit
 
 struct EmotionModel {
-    let imageName: String // 표시할 이미지
+    let imageName: String
 }
 
 extension EmotionModel {
     static let dummyData: [EmotionModel] = [
-        EmotionModel(imageName: "star.fill"),
-        EmotionModel(imageName: "star.fill"),
-        EmotionModel(imageName: "star.fill"),
-        EmotionModel(imageName: "star.fill"),
-        EmotionModel(imageName: "star.fill"),
+        EmotionModel(imageName: "❤️"),
+        EmotionModel(imageName: "👍"),
+        EmotionModel(imageName: "💧"),
+        EmotionModel(imageName: "👏"),
+        EmotionModel(imageName: "🔥"),
     ]
 }

@@ -1,14 +1,7 @@
-//
-//  ReadViewController.swift
-//  37-SOPKATHON-iOS-iOS3
-//
-//  Created by 한현서 on 11/23/25.
-//
-
 import UIKit
+import SnapKit
 import Then
 
-// EmotionViewDelegate
 final class ReadViewController: BaseViewController {
     
     // MARK: - UI Components
@@ -21,28 +14,22 @@ final class ReadViewController: BaseViewController {
     }
     
     // 헤더 영역: 닫기 버튼 (X)
-    private lazy var closeButton = UIButton().then {
+    private let closeButton = UIButton().then { // target은 setAddTarget에서 설정하므로 lazy 제거
         let image = UIImage(systemName: "xmark")
         $0.setImage(image, for: .normal)
         $0.tintColor = .label
-        $0.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
     }
     
-    // 글 제목 보여주는 영역: ReadTitleView
+    // ReadTitleView
     private let readTitleView = ReadTitleView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
+         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    // 글 내용 보여주는 영역: ReadView
-    private let readView = ReadView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        
-    }
+    // ReadView
+    private let readView = ReadView()
     
-    // 감정 선택 영역: EmotionView
-    private let emotionView = EmotionView().then {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
+    // EmotionView
+    private let emotionView = EmotionView()
     
     // 버튼
     private let actionButton = UIButton().then {
@@ -51,6 +38,7 @@ final class ReadViewController: BaseViewController {
         $0.setTitleColor(.white, for: .normal)
         $0.backgroundColor = .primary
         $0.layer.cornerRadius = 8
+        $0.snp.makeConstraints { $0.height.equalTo(44) }
     }
     
     // MARK: - Properties
@@ -66,11 +54,18 @@ final class ReadViewController: BaseViewController {
         
         setupHierarchy()
         setupLayout()
+        
+        readTitleView.configure(with: "제목")
+        readView.configure(with: "어쩌구~~~~~~~~")
     }
     
+    // MARK: - BaseViewController Overrides
     
+    override func setAddTarget() {
+        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+    }
     
-    // MARK: - Setup
+    // MARK: - Setup (UI 위계 및 레이아웃)
     
     private func setupHierarchy() {
         view.addSubview(titleLabel)
@@ -82,55 +77,47 @@ final class ReadViewController: BaseViewController {
     }
     
     private func setupLayout() {
-        
-        [titleLabel, closeButton, readTitleView, readView, emotionView, actionButton].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.snp.makeConstraints {
+            $0.centerY.equalTo(closeButton)
+            $0.leading.equalToSuperview().inset(20)
+            $0.trailing.lessThanOrEqualTo(closeButton.snp.leading).offset(-10)
         }
         
-        let safeArea = view.safeAreaLayoutGuide
+        closeButton.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.width.height.equalTo(44)
+        }
         
-        NSLayoutConstraint.activate([
-            
-            // 헤더: 글을 읽고~~ 하드코딩 부분, X 마크
-            closeButton.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10),
-            closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            closeButton.widthAnchor.constraint(equalToConstant: 44),
-            closeButton.heightAnchor.constraint(equalToConstant: 44),
-            
-            titleLabel.centerYAnchor.constraint(equalTo: closeButton.centerYAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: closeButton.leadingAnchor, constant: -10),
-            
-            // 리드 타이틀 뷰
-            readTitleView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 37),
-            readTitleView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            readTitleView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            readTitleView.heightAnchor.constraint(equalToConstant: 65), // 높이
-            
-            // 리드 뷰
-            readView.topAnchor.constraint(equalTo: readTitleView.bottomAnchor, constant: 24),
-            readView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            readView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            readView.bottomAnchor.constraint(equalTo: emotionView.topAnchor, constant: -30),
-            
-            // 이모션 뷰
-            emotionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            emotionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            emotionView.bottomAnchor.constraint(equalTo: actionButton.topAnchor, constant: -20),
-            emotionView.heightAnchor.constraint(equalToConstant: 100), // 높이 설정
-            
-            // 버튼
-            actionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            actionButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            actionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            actionButton.heightAnchor.constraint(equalToConstant: 50),
-        ])
+        readTitleView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).offset(37)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(43)
+        }
+        
+        readView.snp.makeConstraints {
+            $0.top.equalTo(readTitleView.snp.bottom).offset(0)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalTo(emotionView.snp.top).offset(-30)
+        }
+        
+        emotionView.snp.makeConstraints {
+            $0.top.equalTo(readView.snp.bottom).offset(0)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalTo(actionButton.snp.top).offset(-68)
+            $0.height.equalTo(56)
+        }
+        
+        actionButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(56)
+        }
     }
     
     // MARK: - Actions
     
     @objc private func closeButtonTapped() {
-        // 모달로 띄웠을 경우:??
         self.dismiss(animated: true, completion: nil)
     }
 }
