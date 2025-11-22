@@ -149,7 +149,7 @@ class SaveCell: UITableViewCell {
         }
         
         if item.tear > 0 {
-            let reactionView = createReactionView(emoji: "😢", count: item.tear)
+            let reactionView = createReactionView(emoji: "💧", count: item.tear)
             reactionStackView.addArrangedSubview(reactionView)
         }
         
