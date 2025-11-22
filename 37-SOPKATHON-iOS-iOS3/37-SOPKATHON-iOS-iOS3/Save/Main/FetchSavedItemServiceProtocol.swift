@@ -5,4 +5,8 @@
 //  Created by JIN on 11/23/25.
 //
 
-import Foundation
+import UIKit
+
+protocol FetchSavedItemServiceProtocol {
+    func getSavedItem() async throws -> DataClass
+}

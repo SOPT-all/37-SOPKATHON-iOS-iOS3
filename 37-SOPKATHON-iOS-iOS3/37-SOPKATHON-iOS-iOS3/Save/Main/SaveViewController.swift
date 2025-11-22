@@ -13,7 +13,7 @@ import Then
 class SaveViewController: BaseViewController {
     
     private let saveView = SaveView()
-    private var savedItems: [SavedItem] = []
+    private var savedItems: [Diary] = []
     
     override func loadView() {
         view = saveView
@@ -22,7 +22,9 @@ class SaveViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        loadDummyData()
+        Task {
+            await getSavedItemData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,33 +86,54 @@ struct SavedItem {
     let content: String
     let keywords: [String]
     let date: String
-    let reactions: [Reaction]
+    let heart, good, tear, clap: Int
+    let fire: Int
 }
 
-struct Reaction {
-    let emoji: String
-    let count: Int
+struct DataClass: Codable {
+    let diaries: [Diary]
 }
+
+// MARK: - Diary
+struct Diary: Codable {
+    let id: Int
+    let title, content, createdAt: String
+    let tags: [String]
+    let heart, good, tear, clap: Int
+    let fire: Int
+}
+
 
 extension SaveViewController {
     
     private func loadDummyData() {
         savedItems = [
-            SavedItem(
+            Diary(
+                id: 0,
                 title: "제목",
                 content: "내용",
-                keywords: ["키워드", "키워드", "키워드"],
-                date: "2025.01.11",
-                reactions: [
-                    Reaction(emoji: "👏", count: 2),
-                    Reaction(emoji: "❤️", count: 1)
-                ]
+                createdAt: "2025.01.11",
+                tags: ["키워드", "키워드", "키워드"],
+                heart: 2,
+                good: 1,
+                tear: 0,
+                clap: 2,
+                fire: 1,
+//                reactions: [
+//                    Reaction(emoji: "👏", count: 2),
+//                    Reaction(emoji: "❤️", count: 1)
+//                ]
             )
         ]
         saveView.mainTableView.reloadData()
     }
     
-    func getSavedItemData() {
-        
+    func getSavedItemData() async {
+        do {
+            savedItems = try await FetchSavedItemService().getSavedItem().diaries
+            saveView.mainTableView.reloadData()
+        } catch {
+            print("Failed to fetch saved items: \(error.localizedDescription)")
+        }
     }
 }

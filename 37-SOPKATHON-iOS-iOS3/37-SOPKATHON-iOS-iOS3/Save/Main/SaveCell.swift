@@ -99,7 +99,7 @@ class SaveCell: UITableViewCell {
         }
         
         dateLabel.snp.makeConstraints {
-            $0.bottom.equalTo(reactionStackView.snp.bottom)
+            $0.top.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().inset(20)
         }
         
@@ -117,7 +117,7 @@ class SaveCell: UITableViewCell {
         
         reactionStackView.snp.makeConstraints {
             $0.top.equalTo(keywordsLabel.snp.bottom).offset(14)
-            $0.leading.equalToSuperview().offset(20)
+            $0.leading.equalToSuperview().offset(16)
             $0.bottom.equalToSuperview().inset(20)
         }
         
@@ -128,16 +128,38 @@ class SaveCell: UITableViewCell {
         }
     }
     
-    func configure(with item: SavedItem) {
+    func configure(with item: Diary) {
         titleLabel.text = item.title
-        dateLabel.text = item.date
+        dateLabel.text = item.createdAt
         contentLabel.text = item.content
-        keywordsLabel.text = item.keywords.map { "\($0)" }.joined(separator: " ")
+        keywordsLabel.text = item.tags.map { "\($0)" }.joined(separator: " ")
         
+        // 기존 reaction 뷰 제거
         reactionStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
-        item.reactions.forEach { reaction in
-            let reactionView = createReactionView(emoji: reaction.emoji, count: reaction.count)
+        // 각 리액션 타입별로 확인하고 추가
+        if item.heart > 0 {
+            let reactionView = createReactionView(emoji: "❤️", count: item.heart)
+            reactionStackView.addArrangedSubview(reactionView)
+        }
+        
+        if item.good > 0 {
+            let reactionView = createReactionView(emoji: "👍", count: item.good)
+            reactionStackView.addArrangedSubview(reactionView)
+        }
+        
+        if item.tear > 0 {
+            let reactionView = createReactionView(emoji: "😢", count: item.tear)
+            reactionStackView.addArrangedSubview(reactionView)
+        }
+        
+        if item.clap > 0 {
+            let reactionView = createReactionView(emoji: "👏", count: item.clap)
+            reactionStackView.addArrangedSubview(reactionView)
+        }
+        
+        if item.fire > 0 {
+            let reactionView = createReactionView(emoji: "🔥", count: item.fire)
             reactionStackView.addArrangedSubview(reactionView)
         }
     }
@@ -166,4 +188,3 @@ class SaveCell: UITableViewCell {
         return containerView
     }
 }
-
