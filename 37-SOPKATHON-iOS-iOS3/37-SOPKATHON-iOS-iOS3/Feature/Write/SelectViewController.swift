@@ -14,6 +14,10 @@ final class SelectViewController: BaseViewController {
         view = rootView
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setAddTarget()
@@ -29,9 +33,6 @@ final class SelectViewController: BaseViewController {
         rootView.recommendSubject.isUserInteractionEnabled = true
         rootView.recommendSubject.addGestureRecognizer(recommendTap)
     }
-    
-    
-    
 }
 
 extension SelectViewController {
@@ -43,10 +44,12 @@ extension SelectViewController {
     @objc
     private func freeSubjectDidTap() {
         rootView.freeSubject.toggleType()
+        rootView.recommendSubject.isUserInteractionEnabled = !rootView.recommendSubject.isUserInteractionEnabled
     }
     
     @objc
     private func recommendSubjectDidTap() {
-       rootView.recommendSubject.toggleType()
+        rootView.recommendSubject.toggleType()
+        rootView.freeSubject.isUserInteractionEnabled = !rootView.freeSubject.isUserInteractionEnabled
     }
 }

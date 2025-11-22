@@ -51,6 +51,7 @@ enum ButtonType {
 final class SelectSubjectButton: BaseView {
     private let title = UILabel()
     private var type: ButtonType = .normal
+    private var isEnabled = true
     
     init(title: String) {
         super.init(frame: .zero)
@@ -75,6 +76,7 @@ final class SelectSubjectButton: BaseView {
             $0.layer.borderColor = type.borderColor
             $0.layer.borderWidth = CGFloat(type.borderWidth)
             $0.layer.cornerRadius = 15
+            $0.isUserInteractionEnabled = true
         }
         
         title.do {
@@ -99,7 +101,7 @@ extension SelectSubjectButton {
         self.type = self.type == .normal ? .selected : .normal
         updateUI(type: self.type)
     }
-    
+        
     private func updateUI(type: ButtonType) {
         self.do {
             $0.backgroundColor = type.backgroundColor
