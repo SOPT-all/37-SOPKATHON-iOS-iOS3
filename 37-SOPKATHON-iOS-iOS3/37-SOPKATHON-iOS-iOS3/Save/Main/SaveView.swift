@@ -21,7 +21,6 @@ class SaveView: BaseView {
     override func setUI() {
         self.addSubviews(mainTableView, titleStackView)
         titleStackView.addArrangedSubviews(titleLabel, saveViewImage)
-
     }
     
     override func setStyle() {
