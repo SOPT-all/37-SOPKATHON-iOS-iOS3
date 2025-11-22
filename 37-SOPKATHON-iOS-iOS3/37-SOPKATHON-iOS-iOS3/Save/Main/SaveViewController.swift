@@ -48,22 +48,6 @@ class SaveViewController: BaseViewController {
         saveView.mainTableView.separatorStyle = .none
         saveView.mainTableView.backgroundColor = .white
     }
-    
-    private func loadDummyData() {
-        savedItems = [
-            SavedItem(
-                title: "제목",
-                content: "내용",
-                keywords: ["키워드", "키워드", "키워드"],
-                date: "2025.01.11",
-                reactions: [
-                    Reaction(emoji: "👏", count: 2),
-                    Reaction(emoji: "❤️", count: 1)
-                ]
-            )
-        ]
-        saveView.mainTableView.reloadData()
-    }
 }
 
 // MARK: - UITableViewDataSource
@@ -108,3 +92,25 @@ struct Reaction {
     let count: Int
 }
 
+extension SaveViewController {
+    
+    private func loadDummyData() {
+        savedItems = [
+            SavedItem(
+                title: "제목",
+                content: "내용",
+                keywords: ["키워드", "키워드", "키워드"],
+                date: "2025.01.11",
+                reactions: [
+                    Reaction(emoji: "👏", count: 2),
+                    Reaction(emoji: "❤️", count: 1)
+                ]
+            )
+        ]
+        saveView.mainTableView.reloadData()
+    }
+    
+    func getSavedItemData() {
+        
+    }
+}
