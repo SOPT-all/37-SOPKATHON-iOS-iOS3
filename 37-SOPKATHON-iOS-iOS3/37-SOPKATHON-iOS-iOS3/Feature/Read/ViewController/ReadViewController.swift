@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class ReadViewController: BaseViewController {
+final class ReadViewController: BaseViewController  {
     
     // MARK: - UI Components
     
@@ -25,7 +25,6 @@ final class ReadViewController: BaseViewController {
         let image = UIImage(systemName: "xmark")
         $0.setImage(image, for: .normal)
         $0.tintColor = .label
-        //        $0.addTarget(ReadViewController.self, action: #selector(closeButtonTapped), for: .touchUpInside)
     }
     
     // ReadTitleView
@@ -49,6 +48,8 @@ final class ReadViewController: BaseViewController {
         $0.snp.makeConstraints { $0.height.equalTo(48) }
     }
     
+    private let service = DefaultRandomDiaryService()
+    
     // MARK: - Properties
     
     private var selectedEmotion: EmotionModel?
@@ -62,10 +63,25 @@ final class ReadViewController: BaseViewController {
         
         setupHierarchy()
         setupLayout()
-        
-        readTitleView.configure(with: "제목")
-        readView.configure(with: "어쩌구~~~~~~~~")
+        loadRandomDiaryData()
     }
+    
+    private func loadRandomDiaryData() {
+        Task {
+            do {
+                let diaryData = try await service.getRandomDiary()
+                
+                await MainActor.run {
+                    self.readTitleView.configure(with: diaryData.title)
+                    self.readView.configure(with: diaryData.content)
+                }
+            } catch {
+                print("일기 데이터 로딩 중 에러 발생: \(error)")
+            }
+        }
+    }
+    
+    
     
     private func setupAddTarget() {
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
@@ -133,14 +149,12 @@ final class ReadViewController: BaseViewController {
         self.dismiss(animated: true) {
             print("ReadViewController가 닫히고 이전 화면으로 돌아갔습니다.")
         }
-        //        let nextVC = MainViewController() // 이동할 ViewController 인스턴스
-        //                if let navigationController = self.navigationController {
-        //                    navigationController.pushViewController(nextVC, animated: true)
-        //                } else {
-        //                    // 네비게이션 스택이 없을 경우 모달로 띄우거나 dismiss 후 처리
-        //                    self.dismiss(animated: true) {
-        //                        // 필요하다면 여기서 윈도우의 rootViewController를 변경하는 로직이 필요할 수 있습니다.
-        //                    }
-        //                }
+        let nextVC = HomeViewController()
+        if let navigationController = self.navigationController {
+            navigationController.pushViewController(nextVC, animated: true)
+        } else {
+            self.dismiss(animated: true) {
+            }
+        }
     }
 }
