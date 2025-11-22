@@ -25,6 +25,10 @@ class SaveViewController: UIViewController {
         loadDummyData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+    }
+    
     private func setupTableView() {
         saveView.mainTableView.delegate = self
         saveView.mainTableView.dataSource = self
