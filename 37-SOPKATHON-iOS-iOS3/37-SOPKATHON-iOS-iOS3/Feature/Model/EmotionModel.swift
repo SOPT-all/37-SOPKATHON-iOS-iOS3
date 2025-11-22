@@ -5,7 +5,7 @@
 //  Created by 한현서 on 11/22/25.
 //
 
-import Foundation
+import UIKit
 
 struct EmotionModel {
     let imageName: String // 표시할 이미지

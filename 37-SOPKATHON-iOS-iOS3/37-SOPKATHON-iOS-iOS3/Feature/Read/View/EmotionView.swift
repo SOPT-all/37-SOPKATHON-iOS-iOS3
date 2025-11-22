@@ -103,7 +103,7 @@ extension EmotionView: UICollectionViewDelegateFlowLayout {
         
         let width = floor((totalWidth - totalSpacing) / numberOfItemsPerRow)
         
-        let height: CGFloat = 80 // 높이 고정값 80
+        let height: CGFloat = 56 // 높이 고정값
         
         return CGSize(width: width, height: height)
     }

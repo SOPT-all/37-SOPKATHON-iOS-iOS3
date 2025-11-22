@@ -46,9 +46,10 @@ final class ReadViewController: BaseViewController {
     
     // 버튼
     private let actionButton = UIButton().then {
-        $0.setTitle("버튼", for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        $0.backgroundColor = .black
+        $0.setTitle("완료", for: .normal)
+        $0.titleLabel?.font = .pretendard(weight: .Medium, size: 14)
+        $0.setTitleColor(.white, for: .normal)
+        $0.backgroundColor = .primary
         $0.layer.cornerRadius = 8
     }
     
