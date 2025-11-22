@@ -113,4 +113,26 @@ extension SelectSubjectButton {
             $0.textColor = type.titleColor
         }
     }
+    
+    func setSelected(_ isSelected: Bool) {
+        if isSelected {
+            self.do {
+                $0.backgroundColor = ButtonType.selected.backgroundColor
+                $0.layer.borderColor = ButtonType.selected.borderColor
+                $0.layer.borderWidth = CGFloat(ButtonType.selected.borderWidth)
+            }
+            title.do {
+                $0.textColor = ButtonType.selected.titleColor
+            }
+        } else {
+            self.do {
+                $0.backgroundColor = ButtonType.normal.backgroundColor
+                $0.layer.borderColor = ButtonType.normal.borderColor
+                $0.layer.borderWidth = CGFloat(ButtonType.normal.borderWidth)
+            }
+            title.do {
+                $0.textColor = ButtonType.normal.titleColor
+            }
+        }
+    }
 }

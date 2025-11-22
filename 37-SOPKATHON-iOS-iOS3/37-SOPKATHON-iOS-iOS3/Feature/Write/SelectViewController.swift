@@ -9,6 +9,7 @@ import UIKit
 
 final class SelectViewController: BaseViewController {
     private let rootView = SelectView()
+    private var type: String = ""
     
     override func loadView() {
         view = rootView
@@ -32,6 +33,9 @@ final class SelectViewController: BaseViewController {
         let recommendTap = UITapGestureRecognizer(target: self, action: #selector(recommendSubjectDidTap))
         rootView.recommendSubject.isUserInteractionEnabled = true
         rootView.recommendSubject.addGestureRecognizer(recommendTap)
+        
+        rootView.backButton.addTarget(self, action: #selector(backButtonDidTap), for: .touchUpInside)
+        rootView.nextButton.addTarget(self, action: #selector(nextButtonDidTap), for: .touchUpInside)
     }
 }
 
@@ -43,13 +47,29 @@ extension SelectViewController {
     
     @objc
     private func freeSubjectDidTap() {
-        rootView.freeSubject.toggleType()
-        rootView.recommendSubject.isUserInteractionEnabled = !rootView.recommendSubject.isUserInteractionEnabled
+        rootView.freeSubject.setSelected(true)
+        rootView.recommendSubject.setSelected(false)
+        rootView.nextButton.setupStyle(style: .complete)
+        type = "FREE"
+    }
+
+    @objc
+    private func recommendSubjectDidTap() {
+        rootView.recommendSubject.setSelected(true)
+        rootView.freeSubject.setSelected(false)
+        rootView.nextButton.setupStyle(style: .complete)
+        type = "SELECT"
     }
     
     @objc
-    private func recommendSubjectDidTap() {
-        rootView.recommendSubject.toggleType()
-        rootView.freeSubject.isUserInteractionEnabled = !rootView.freeSubject.isUserInteractionEnabled
+    private func nextButtonDidTap() {
+        if type == "FREE" {
+            let viewController = FreeSubjectWriteViewController()
+            self.navigationController?.pushViewController(viewController, animated: true)
+        } else {
+            let viewController = RecommendSubjectWriteViewController()
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
     }
+    
 }

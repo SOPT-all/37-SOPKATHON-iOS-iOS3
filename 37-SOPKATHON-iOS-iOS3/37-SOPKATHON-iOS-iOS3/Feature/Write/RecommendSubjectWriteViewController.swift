@@ -23,16 +23,49 @@ final class RecommendSubjectWriteViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setAddTarget()
         getSubjectTitle()
+    }
+    
+    override func setAddTarget() {
+        rootView.completeButton.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
+        rootView.backButton.addTarget(self, action: #selector(backButtonDidTap), for: .touchUpInside)
     }
     
     private func getSubjectTitle() {
         Task {
             do {
                 let result = try await service.getRecommendSubject()
+                titleText = result
                 rootView.bind(title: result)
             } catch {
                 print("error")
+            }
+        }
+    }
+}
+
+extension RecommendSubjectWriteViewController {
+    @objc
+    private func backButtonDidTap() {
+        self.navigationController?.popViewController(animated: false)
+    }
+    
+    @objc
+    private func completeButtonDidTap() {
+        Task {
+            do {
+                let _ = try await service.saveDiary(
+                    subject: titleText,
+                    subjectType: "SELECT",
+                    title: self.rootView.titleTextField.textField?.text ?? "",
+                    content: self.rootView.textTextField.textView?.text ?? ""
+                )
+                
+                let viewController = CompleteViewController()
+                self.navigationController?.pushViewController(viewController, animated: true)
+            } catch {
+                print("저장 실패")
             }
         }
     }

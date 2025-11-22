@@ -28,7 +28,7 @@ class FetchSavedItemService: FetchSavedItemServiceProtocol {
                     good: 1,
                     tear: 0,
                     clap: 2,
-                    fire: 1,
+                    fire: 1
                 )])
             
         }

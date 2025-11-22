@@ -15,6 +15,11 @@ final class HomeViewController: BaseViewController {
         view = rootView
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationItem.hidesBackButton = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
