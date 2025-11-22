@@ -39,13 +39,12 @@ final class ReadViewController: BaseViewController  {
     private let emotionView = EmotionView()
     
     // 버튼
-    private let actionButton = UIButton().then {
+    private lazy var actionButton = UIButton().then {
         $0.setTitle("완료", for: .normal)
         $0.titleLabel?.font = .pretendard(weight: .Semibold, size: 16)
         $0.setTitleColor(.black, for: .normal)
         $0.backgroundColor = .primary
         $0.layer.cornerRadius = 8
-        $0.snp.makeConstraints { $0.height.equalTo(48) }
     }
     
     private let service = DefaultRandomDiaryService()
@@ -53,17 +52,19 @@ final class ReadViewController: BaseViewController  {
     // MARK: - Properties
     
     private var selectedEmotion: EmotionModel?
+    private let empathyService = DefaultEmpathyEmotionService()
+    private var diaryID: Int = 0
     
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupAddTarget()
         view.backgroundColor = .systemBackground
         
         setupHierarchy()
         setupLayout()
         loadRandomDiaryData()
+        setAddTarget()
     }
     
     private func loadRandomDiaryData() {
@@ -74,6 +75,7 @@ final class ReadViewController: BaseViewController  {
                 await MainActor.run {
                     self.readTitleView.configure(with: diaryData.title)
                     self.readView.configure(with: diaryData.content)
+                    self.diaryID = diaryData.id
                 }
             } catch {
                 print("일기 데이터 로딩 중 에러 발생: \(error)")
@@ -82,15 +84,13 @@ final class ReadViewController: BaseViewController  {
     }
     
     
-    
-    private func setupAddTarget() {
-        closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
-    }
+
     
     // MARK: - BaseViewController Overrides
     
     override func setAddTarget() {
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+        actionButton.addTarget(self, action: #selector(actionButtonTapped), for: .touchUpInside)
     }
     
     // MARK: - Setup
@@ -157,4 +157,42 @@ final class ReadViewController: BaseViewController  {
             window.makeKeyAndVisible()
         }
     }
+    
+    
+    @objc
+    private func actionButtonTapped() {
+        print("saving...")
+        
+        
+        fetchDiary()
+        
+        
+    }
+    
+    private func fetchDiary() {
+        Task {
+            do {
+                let _ = try await empathyService.postEmotion(id: diaryID, emotion: emotionView.emotion)
+                print("감정 보내기 성공")
+                
+                await MainActor.run {
+                    let vc = HomeViewController()
+                    self.navigationController?.pushViewController(vc,animated: true)
+                }
+            } catch {
+                print("저장 안됨")
+            }
+        }
+    }
+    
+//    @objc private func postEmotion() async throws {
+//        Task {
+//            do {
+//                let _ = try await empathyService.postEmotion(id: diaryID, emotion: emotionView.emotion) // 받아와야됨... . .
+//                print("감정 보내기 성공")
+//            } catch {
+//                print("저장 안됨")
+//            }
+//        }
+//    }
 }

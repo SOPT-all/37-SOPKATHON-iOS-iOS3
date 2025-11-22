@@ -16,6 +16,7 @@ protocol EmotionViewDelegate: AnyObject {
 final class EmotionView: UICollectionView {
     
     weak var emotionViewDelegate: EmotionViewDelegate?
+    var emotion: String = ""
     
     // MARK: - Properties
     
@@ -84,6 +85,11 @@ extension EmotionView: UICollectionViewDataSource {
     }
 }
 
+extension EmotionView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        emotion = emotionData[indexPath.item].emoji
+    }
+}
 
 extension EmotionView: UICollectionViewDelegateFlowLayout {
     
