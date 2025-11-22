@@ -1,0 +1,11 @@
+//
+//  Config.xcconfig
+//  37-SOPKATHON-iOS-iOS3
+//
+//  Created by 이나연 on 11/23/25.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+BASE_URL = http:/$()/13.209.148.138:8080/
