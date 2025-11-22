@@ -12,10 +12,11 @@ import Then
 
 final class SaveHeaderView: UIView {
     
-    private let backButton = UIButton()
     private let profileImageView = UIImageView()
     private let titleLabel = UILabel()
     private let headerContainerView = UIStackView()
+    let backButton = UIButton()
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)

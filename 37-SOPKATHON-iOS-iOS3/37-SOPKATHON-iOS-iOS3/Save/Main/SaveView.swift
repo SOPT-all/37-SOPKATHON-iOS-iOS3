@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class SaveView: UIView {
+final class SaveView: BaseView {
     
     let headerView = SaveHeaderView()
     let mainTableView = UITableView(frame: .zero, style: .plain)
@@ -26,11 +26,11 @@ final class SaveView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setUI() {
+    override func setUI() {
         addSubviews(headerView, mainTableView)
     }
     
-    private func setStyle() {
+    override func setStyle() {
         backgroundColor = .white
         
         mainTableView.do {
@@ -39,7 +39,7 @@ final class SaveView: UIView {
         }
     }
     
-    private func setLayout() {
+    override func setLayout() {
         headerView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(135)

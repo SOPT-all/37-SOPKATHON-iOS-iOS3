@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-class SaveViewController: UIViewController {
+class SaveViewController: BaseViewController {
     
     private let saveView = SaveView()
     private var savedItems: [SavedItem] = []
@@ -27,6 +27,18 @@ class SaveViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func setAddTarget() {
+        let backButtonImageTap = UITapGestureRecognizer(target: self, action: #selector(backImageDidTap))
+        saveView.headerView.backButton.isUserInteractionEnabled = true
+        saveView.headerView.backButton.addGestureRecognizer(backButtonImageTap)
+        
+    }
+
+    @objc
+    private func backImageDidTap() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     private func setupTableView() {
