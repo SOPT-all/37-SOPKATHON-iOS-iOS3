@@ -88,7 +88,7 @@ final class HomeView: BaseView {
         
         characterImageView.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(83)
-            $0.trailing.equalToSuperview().inset(23)
+            $0.trailing.equalToSuperview().inset(10)
             $0.width.equalTo(142)
             $0.height.equalTo(274)
         }
