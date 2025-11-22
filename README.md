@@ -1,15 +1,26 @@
 # 37-SOPKATHON-iOS-iOS3
-37기 솝커톤 iOS 3팀 iOS 레포지토리입니다
+37기 솝커톤 iOS 3팀  iOS 레포지토리입니다
 
 ## 서비스 이름 및 간단한 소개
+### Elfisode (엘피소드)
+익명으로 마음을 털어놓고, 또래의 이야기를 받아볼 수 있는 아이슬란드 청소년 감정 공유 플랫폼
 
 ## 주요 기능
+- 오늘 있었던 일이나 추천주제, 자유주제로 글을 써서 익명으로 보낼 수 있습니다. 
+- 글 작성 이후 익명의 다른 또래가 적은 이야기를 랜덤으로 받아볼 수 있습니다.
+- 다른 익명의 친구가 적은 글에 반응을 보낼 수 있습니다.
+- 내가 쓴 글들을 모아볼 수 있습니다.
+- 내가 쓴 글에 어떤 반응이 달렸는지 확인할 수 있습니다. 
+
+<br />
 
 ## 팀원 역할 분담
 | [이나연(Lead)](https://github.com/y-eonee)| [공수민](https://github.com/sum130) | [이진재](https://github.com/LJIN24) | [한현서](https://github.com/hyunseo-han) |
 | --- | --- | --- | --- |
 | <p align="center"><img src="https://github.com/y-eonee.png" width="260"/></p> |  <p align="center"> <img src="https://github.com/sum130.png" width="260"/></p>  | <p align="center"><img src="https://github.com/LJIN24.png" width="260"/></p> | <p align="center"><img src="https://github.com/hyunseo-han.png" width="260"/></p> |
 | <p align="center"> 홈, 작성하기 </p> | <p align="center"> 메아리 받기, 답장 상세보기 </p> | <p align="center"> 내가 작성한 글 모아보기 </p> | <p align="center"> 답장 상세보기 </p> |
+
+<br />
 
 ## 컨벤션 규칙과 브랜치 전략
 ### Prefix
@@ -34,5 +45,6 @@
 6. merge 이후에는 로컬에서도 main으로 이동하여 pull 받는다.
 
 
+<br />
 ## 아요 팀원들의 사진(before)
 <img src= "https://github.com/user-attachments/assets/07da265c-8349-4735-a6cf-bc390c2c9c9b" width = "720" />
