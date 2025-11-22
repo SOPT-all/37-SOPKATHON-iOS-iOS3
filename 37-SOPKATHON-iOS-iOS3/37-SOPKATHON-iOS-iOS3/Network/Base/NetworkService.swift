@@ -7,19 +7,19 @@
 
 import Foundation
 
-final class NetwrokService {
+final class NetworkService {
     
-    static let shared = NetwrokService()
+    static let shared = NetworkService()
     private init() {}
     
     func request<Response: Decodable>(
         endPoint: EndPoint,
         body: Encodable? = nil
     ) async throws -> Response {
-        guard let baseURL = Bundle.main.infoDictionary?["BASE_URL"] as? String else {
-            throw NetworkError.urlError
-        }
-        let url = baseURL + endPoint.url
+//        guard let baseURL = Bundle.main.infoDictionary?["BASE_URL"] as? String else {
+//            throw NetworkError.urlError
+//        }
+        let url = "http://13.209.148.138:8080" + endPoint.url
         
         guard let encodedURL = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             throw NetworkError.urlError
@@ -47,7 +47,7 @@ final class NetwrokService {
     }
 }
 
-extension NetwrokService {
+extension NetworkService {
     private func makeRequestBody<Body: Encodable>(data: Body) throws -> Data {
         do {
             let jsonEncoder = JSONEncoder()
@@ -76,8 +76,7 @@ extension NetwrokService {
                 throw NetworkError.noData
             }
             
-            guard let code = Int(decoded.code),
-                  (200...299).contains(code) else {
+            guard (200...299).contains(decoded.code) else {
                 throw NetworkError.serverErrorMessage(decoded.msg)
             }
             
