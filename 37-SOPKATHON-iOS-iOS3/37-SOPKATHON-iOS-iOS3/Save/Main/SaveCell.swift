@@ -72,17 +72,20 @@ class SaveCell: UITableViewCell {
 
         contentLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(8)
-            $0.leading.trailing.equalTo(titleLabel)
+            $0.leading.equalTo(titleLabel)
+            $0.trailing.equalTo(dateLabel.snp.leading).offset(-12)
+            $0.bottom.equalTo(separatorLine.snp.top).offset(-16)
         }
 
         dateLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(16)
             $0.trailing.equalToSuperview().offset(-20)
-
         }
 
         separatorLine.snp.makeConstraints {
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.bottom.equalToSuperview()
             $0.height.equalTo(1)
         }
     }
