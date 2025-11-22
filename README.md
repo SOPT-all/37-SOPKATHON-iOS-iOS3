@@ -46,5 +46,6 @@
 
 
 <br />
+
 ## 아요 팀원들의 사진(before)
 <img src= "https://github.com/user-attachments/assets/07da265c-8349-4735-a6cf-bc390c2c9c9b" width = "720" />
