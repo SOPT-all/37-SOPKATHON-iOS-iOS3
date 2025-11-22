@@ -162,16 +162,23 @@ final class ReadViewController: BaseViewController  {
     @objc
     private func actionButtonTapped() {
         print("saving...")
-//        await fetchDiary()
+        
+        
+        fetchDiary()
         
         
     }
     
-    private func fetchDiary() async throws {
+    private func fetchDiary() {
         Task {
             do {
                 let _ = try await empathyService.postEmotion(id: diaryID, emotion: emotionView.emotion)
                 print("감정 보내기 성공")
+                
+                await MainActor.run {
+                    let vc = HomeViewController()
+                    self.navigationController?.pushViewController(vc,animated: true)
+                }
             } catch {
                 print("저장 안됨")
             }
