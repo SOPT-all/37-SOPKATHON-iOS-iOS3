@@ -14,13 +14,21 @@ final class FreeSubjectWriteView: BaseView {
     let titleTextField = CustomTextField(type: .title)
     let textTextField = CustomTextField(type: .text)
     
+    private let buttonStackView = UIStackView()
+    
+    private let backButton = PagingButton(style: .enabledBack)
+    private let completeButton = PagingButton(style: .complete)
+    
+    
     override func setUI() {
         addSubviews(
             progressImage,
             titleLabel,
             titleTextField,
-            textTextField
+            textTextField,
+            buttonStackView
         )
+        buttonStackView.addArrangedSubviews(backButton, completeButton)
     }
     
     override func setStyle() {
@@ -57,6 +65,14 @@ final class FreeSubjectWriteView: BaseView {
         textTextField.snp.makeConstraints {
             $0.top.equalTo(titleTextField.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(22)
+        }
+        buttonStackView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(22)
+            $0.bottom.equalToSuperview().inset(40)
+        }
+        buttonStackView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(22)
+            $0.bottom.equalToSuperview().inset(40)
         }
     }
 }

@@ -15,6 +15,14 @@ final class SelectView: BaseView {
     let freeSubject = SelectSubjectButton(title: "자유 주제")
     let recommendSubject = SelectSubjectButton(title: "주제 선택")
     
+    
+    private let buttonStackView = UIStackView()
+    
+    private let backButton = PagingButton(style: .enabledBack)
+    private let nextButton = PagingButton(style: .disabledNext)
+    
+    
+    
     override func setUI() {
         addSubviews(
             progressImage,
@@ -22,8 +30,10 @@ final class SelectView: BaseView {
             titleLabel,
             descriptionLabel,
             freeSubject,
-            recommendSubject
+            recommendSubject,
+            buttonStackView
         )
+        buttonStackView.addArrangedSubviews(backButton, nextButton)
     }
     
     override func setStyle() {
@@ -83,6 +93,10 @@ final class SelectView: BaseView {
         recommendSubject.snp.makeConstraints {
             $0.top.equalTo(freeSubject.snp.bottom).offset(10)
             $0.leading.trailing.equalToSuperview().inset(22)
+        }
+        buttonStackView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(22)
+            $0.bottom.equalToSuperview().inset(40)
         }
     }
 }
