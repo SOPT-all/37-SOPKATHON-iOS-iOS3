@@ -72,6 +72,3 @@ final class CompleteView: BaseView {
     }
 }
 
-#Preview {
-    CompleteView()
-}
