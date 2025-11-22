@@ -5,74 +5,90 @@
 //  Created by JIN on 11/22/25.
 //
 
+// MARK: - SaveViewController
 import UIKit
-
 import SnapKit
 import Then
 
-class SaveViewController: BaseViewController {
-    
-    // MARK: - Properties
+class SaveViewController: UIViewController {
     
     private let saveView = SaveView()
+    private var savedItems: [SavedItem] = []
+    
+    override func loadView() {
+        view = saveView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        
-        // Do any additional setup after loading the view.
-    }
-    
-    override func loadView() {
-        self.view = saveView
+        loadDummyData()
     }
     
     private func setupTableView() {
         saveView.mainTableView.delegate = self
         saveView.mainTableView.dataSource = self
-        saveView.mainTableView.separatorStyle = .none
-        saveView.mainTableView.rowHeight = UITableView.automaticDimension
-        saveView.mainTableView.estimatedRowHeight = 300
         saveView.mainTableView.register(SaveCell.self, forCellReuseIdentifier: SaveCell.identifier)
+        saveView.mainTableView.separatorStyle = .none
+        saveView.mainTableView.backgroundColor = .white
     }
     
-
+    private func loadDummyData() {
+        savedItems = [
+            SavedItem(
+                title: "제목",
+                content: "내용",
+                keywords: ["키워드", "키워드", "키워드"],
+                date: "2025.01.11",
+                reactions: [
+                    Reaction(emoji: "👏", count: 2),
+                    Reaction(emoji: "❤️", count: 1)
+                ]
+            )
+        ]
+        saveView.mainTableView.reloadData()
+    }
 }
 
-
-//MARK: UITableVeiwDelegate
-
-extension SaveViewController: UITableViewDelegate {
-    
+// MARK: - UITableViewDataSource
+extension SaveViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        return savedItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SaveCell.identifier, for: indexPath) as? SaveCell else {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: SaveCell.identifier,
+            for: indexPath
+        ) as? SaveCell else {
             return UITableViewCell()
         }
+        
+        cell.configure(with: savedItems[indexPath.row])
         return cell
     }
 }
 
-
-//MARK: UITableViewDataSource
-
-extension SaveViewController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        158
-    }
+// MARK: - UITableViewDelegate
+extension SaveViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-           // 다음화면으로 이동
-           let detailVC = DetailViewController()
-//           detailVC.movieData = moviesArray[indexPath.row]
-           navigationController?.pushViewController(detailVC, animated: true)
-       }
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
-#Preview {
-    SaveViewController()
+
+// MARK: - Data Models
+struct SavedItem {
+    let title: String
+    let content: String
+    let keywords: [String]
+    let date: String
+    let reactions: [Reaction]
 }
+
+struct Reaction {
+    let emoji: String
+    let count: Int
+}
+
