@@ -14,7 +14,7 @@ final class HomeView: BaseView {
     private let saveImageView = UIImageView()
     private let saveTitleLabel = UILabel()
     private let dialogueImageView = UIImageView()
-    private let characterImageView = UIImageView()
+    let characterImageView = UIImageView()
     
     override func setUI() {
         addSubviews(
@@ -99,8 +99,4 @@ final class HomeView: BaseView {
         }
         
     }
-}
-
-#Preview {
-    HomeView()
 }

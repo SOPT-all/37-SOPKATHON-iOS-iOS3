@@ -20,7 +20,9 @@ final class HomeViewController: BaseViewController {
     }
     
     override func setAddTarget() {
-//        rootView.charcterButton.addTarget(self, action: #selector(charcterDidTap), for: .touchUpInside)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(charcterDidTap))
+        rootView.characterImageView.isUserInteractionEnabled = true
+        rootView.characterImageView.addGestureRecognizer(tap)
     }
 }
 
