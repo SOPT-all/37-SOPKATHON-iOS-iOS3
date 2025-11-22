@@ -10,44 +10,47 @@ import UIKit
 import SnapKit
 import Then
 
-class SaveView: BaseView {
-
-    let titleLabel = UILabel()
-    let titleStackView = UIStackView()
-    let saveViewImage = UIImageView()
+final class SaveView: UIView {
+    
+    let headerView = SaveHeaderView()
     let mainTableView = UITableView(frame: .zero, style: .plain)
-   
     
-    override func setUI() {
-        self.addSubviews(mainTableView, titleStackView)
-        titleStackView.addArrangedSubviews(titleLabel, saveViewImage)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setUI()
+        setStyle()
+        setLayout()
     }
     
-    override func setStyle() {
-        titleLabel.do {
-            $0.font = .pretendard(.head_b_22)
-            $0.text = "마이 보관함"
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setUI() {
+        addSubviews(headerView, mainTableView)
+    }
+    
+    private func setStyle() {
+        backgroundColor = .white
+        
+        mainTableView.do {
+            $0.backgroundColor = .white
+            $0.separatorStyle = .none
+        }
+    }
+    
+    private func setLayout() {
+        headerView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(135)
         }
         
-        titleStackView.do {
-            $0.alignment = .center
-            $0.spacing = 16
-            $0.axis = .horizontal
-        }
-    }
-    
-    override func setLayout() {
         mainTableView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(150)
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(-50)
-        }
-        
-        titleStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(100)
-            $0.leading.equalToSuperview().offset(16)
+            $0.top.equalTo(headerView.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
- 
-
 }
+
+
+
