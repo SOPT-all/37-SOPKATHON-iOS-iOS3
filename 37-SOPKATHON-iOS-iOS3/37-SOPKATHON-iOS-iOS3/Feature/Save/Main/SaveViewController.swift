@@ -118,7 +118,7 @@ extension SaveViewController {
                 good: 1,
                 tear: 0,
                 clap: 2,
-                fire: 1,
+                fire: 1
 //                reactions: [
 //                    Reaction(emoji: "👏", count: 2),
 //                    Reaction(emoji: "❤️", count: 1)

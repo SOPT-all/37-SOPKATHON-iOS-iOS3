@@ -13,7 +13,7 @@ final class SelectView: BaseView {
     private let titleLabel = UILabel()
     private let descriptionLabel = UILabel()
     let freeSubject = SelectSubjectButton(title: "자유 주제")
-    let recommendSubject = SelectSubjectButton(title: "주제 선택")
+    let recommendSubject = SelectSubjectButton(title: "AI 추천 주제로")
     
     
     private let buttonStackView = UIStackView()
@@ -91,13 +91,13 @@ final class SelectView: BaseView {
             $0.height.equalTo(200)
         }
         
-        freeSubject.snp.makeConstraints {
+        recommendSubject.snp.makeConstraints {
             $0.top.equalTo(charcterImageView.snp.bottom).offset(40)
             $0.leading.trailing.equalToSuperview().inset(22)
         }
         
-        recommendSubject.snp.makeConstraints {
-            $0.top.equalTo(freeSubject.snp.bottom).offset(10)
+        freeSubject.snp.makeConstraints {
+            $0.top.equalTo(recommendSubject.snp.bottom).offset(10)
             $0.leading.trailing.equalToSuperview().inset(22)
         }
         buttonStackView.snp.makeConstraints {
