@@ -12,7 +12,7 @@ import Foundation
 enum EndPoint {
     case products // 세부 카테고리에 해당하는 제품 조회
     case productID(Int) // 제품 정보 조회
-    case detail(Int) ///제품 상세 조회
+    case detail(Int) //제품 상세 조회
     case hint(Int) // 제품 stylehint 조회
     case reviews(Int) // 제품 리뷰 조회
     
