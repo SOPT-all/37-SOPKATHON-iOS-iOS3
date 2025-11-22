@@ -35,7 +35,7 @@ final class SelectView: BaseView {
         }
         
         charcterImageView.do {
-            $0.image = .elf
+            $0.image = .writingElf
             $0.contentMode = .scaleAspectFit
         }
         
