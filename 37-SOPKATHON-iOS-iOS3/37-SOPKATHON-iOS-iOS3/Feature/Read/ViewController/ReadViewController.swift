@@ -146,15 +146,15 @@ final class ReadViewController: BaseViewController  {
     // MARK: - Actions
     
     @objc private func closeButtonTapped() {
-        self.dismiss(animated: true) {
-            print("ReadViewController가 닫히고 이전 화면으로 돌아갔습니다.")
-        }
-        let nextVC = HomeViewController()
-        if let navigationController = self.navigationController {
-            navigationController.pushViewController(nextVC, animated: true)
-        } else {
-            self.dismiss(animated: true) {
-            }
+        let homeVC = HomeViewController()
+        
+        let navigationController = UINavigationController(rootViewController: homeVC)
+        
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            
+            window.rootViewController = navigationController
+            window.makeKeyAndVisible()
         }
     }
 }

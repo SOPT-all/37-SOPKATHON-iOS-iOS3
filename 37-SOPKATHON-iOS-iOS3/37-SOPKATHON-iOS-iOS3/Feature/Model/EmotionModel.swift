@@ -8,8 +8,8 @@
 import UIKit
 
 struct EmotionModel {
-    let emoji: String      // UI에 표시할 이모지 ("❤️", "👍", ...)
-    let serverKey: String  // 서버가 기대하는 키 ("heart", "good", ...)
+    let emoji: String
+    let serverKey: String
 }
 
 extension EmotionModel {
