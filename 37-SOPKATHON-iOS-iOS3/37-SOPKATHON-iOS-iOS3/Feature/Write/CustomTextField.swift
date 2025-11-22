@@ -46,8 +46,8 @@ enum TextFieldType {
 final class CustomTextField: BaseView {
     private let title = UILabel()
     private let textFieldContainer = UIView()
-    private var textField: UITextField?
-    private var textView: UITextView?
+    var textField: UITextField?
+    var textView: UITextView?
     private let type: TextFieldType
     
     init(type: TextFieldType) {

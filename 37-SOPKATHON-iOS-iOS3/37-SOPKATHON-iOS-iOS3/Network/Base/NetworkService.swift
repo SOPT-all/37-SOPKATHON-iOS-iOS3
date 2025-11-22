@@ -73,7 +73,8 @@ extension NetworkService {
             let decoded = try JSONDecoder().decode(BaseResponseDTO<Response>.self, from: data)
             
             guard let data = decoded.data else {
-                throw NetworkError.noData
+                print("data 없음")
+                return EmptyResponseDTO.init() as! Response
             }
             
             guard (200...299).contains(decoded.code) else {

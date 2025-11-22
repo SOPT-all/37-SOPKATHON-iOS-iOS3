@@ -19,8 +19,8 @@ class ReceiveArticleView: BaseView {
     private let textBubbleView = UIImageView()
     private let buttonStackView = UIStackView()
     
-    private let backButton = PagingButton(style: .receivedBack)
-    private let nextButton = PagingButton(style: .receiveNext)
+    let backButton = PagingButton(style: .receivedBack)
+    let nextButton = PagingButton(style: .receiveNext)
     
     // MARK: - SetUI
     override func setUI() {

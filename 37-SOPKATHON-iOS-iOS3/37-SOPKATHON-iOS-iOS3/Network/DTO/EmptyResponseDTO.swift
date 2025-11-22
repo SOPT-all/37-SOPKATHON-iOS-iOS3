@@ -2,7 +2,7 @@
 //  EmptyResponseDTO.swift
 //  37-SOPKATHON-iOS-iOS3
 //
-//  Created by sumin Kong on 11/23/25.
+//  Created by 이나연 on 11/23/25.
 //
 
 struct EmptyResponseDTO: Decodable { }

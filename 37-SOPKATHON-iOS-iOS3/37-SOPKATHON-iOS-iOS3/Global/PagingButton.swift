@@ -32,7 +32,7 @@ final class PagingButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupStyle(style: ButtonStyle) {
+    func setupStyle(style: ButtonStyle) {
         self.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         self.layer.cornerRadius = 10
         self.clipsToBounds = true

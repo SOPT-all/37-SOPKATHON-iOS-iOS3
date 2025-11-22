@@ -14,13 +14,20 @@ final class RecommendSubjectWriteView: BaseView {
     let titleTextField = CustomTextField(type: .title)
     let textTextField = CustomTextField(type: .text)
     
+    private let buttonStackView = UIStackView()
+    
+    let backButton = PagingButton(style: .enabledBack)
+    let completeButton = PagingButton(style: .complete)
+    
     override func setUI() {
         addSubviews(
             progressImage,
             titleLabel,
             titleTextField,
-            textTextField
+            textTextField,
+            buttonStackView
         )
+        buttonStackView.addArrangedSubviews(backButton, completeButton)
     }
     
     override func setStyle() {
@@ -33,6 +40,12 @@ final class RecommendSubjectWriteView: BaseView {
         
         titleLabel.do {
             $0.font = .pretendard(.head_b_22)
+        }
+        
+        buttonStackView.do {
+            $0.axis = .horizontal
+            $0.distribution = .fillEqually
+            $0.spacing = 10
         }
     }
     
@@ -56,6 +69,11 @@ final class RecommendSubjectWriteView: BaseView {
         textTextField.snp.makeConstraints {
             $0.top.equalTo(titleTextField.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(22)
+        }
+        
+        buttonStackView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(22)
+            $0.bottom.equalToSuperview().inset(40)
         }
     }
 }

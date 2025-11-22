@@ -16,8 +16,8 @@ final class FreeSubjectWriteView: BaseView {
     
     private let buttonStackView = UIStackView()
     
-    private let backButton = PagingButton(style: .enabledBack)
-    private let completeButton = PagingButton(style: .complete)
+    let backButton = PagingButton(style: .enabledBack)
+    let completeButton = PagingButton(style: .complete)
     
     
     override func setUI() {
@@ -43,6 +43,12 @@ final class FreeSubjectWriteView: BaseView {
             $0.font = .pretendard(.head_b_22)
             $0.text = "자유 주제를 작성해주세요"
         }
+        
+        buttonStackView.do {
+            $0.axis = .horizontal
+            $0.distribution = .fillEqually
+            $0.spacing = 10
+        }
     }
     
     override func setLayout() {
@@ -65,10 +71,6 @@ final class FreeSubjectWriteView: BaseView {
         textTextField.snp.makeConstraints {
             $0.top.equalTo(titleTextField.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(22)
-        }
-        buttonStackView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(22)
-            $0.bottom.equalToSuperview().inset(40)
         }
         buttonStackView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(22)

@@ -18,8 +18,8 @@ final class SelectView: BaseView {
     
     private let buttonStackView = UIStackView()
     
-    private let backButton = PagingButton(style: .enabledBack)
-    private let nextButton = PagingButton(style: .disabledNext)
+    let backButton = PagingButton(style: .enabledBack)
+    let nextButton = PagingButton(style: .disabledNext)
     
     
     
@@ -58,6 +58,12 @@ final class SelectView: BaseView {
             $0.text = "1가지만 선택 가능해요."
             $0.font = .pretendard(.title_sb_14)
             $0.textColor = .grey500
+        }
+        
+        buttonStackView.do {
+            $0.axis = .horizontal
+            $0.distribution = .fillEqually
+            $0.spacing = 10
         }
     }
     

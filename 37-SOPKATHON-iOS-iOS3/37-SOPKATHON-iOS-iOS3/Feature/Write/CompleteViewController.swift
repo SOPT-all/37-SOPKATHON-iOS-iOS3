@@ -8,5 +8,20 @@
 import UIKit
 
 final class CompleteViewController: BaseViewController {
+    private let rootView = CompleteView()
+    
+    override func loadView() {
+        view = rootView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            let viewController = ReceiveArticleViewController()
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
+    
     
 }
