@@ -65,7 +65,7 @@ class SaveCell: UITableViewCell {
         contentLabel.do {
             $0.font = .pretendard(.body_r_14)
             $0.textColor = .grey400
-            $0.numberOfLines = 2
+            $0.numberOfLines = 0
         }
         
         keywordsLabel.do {
