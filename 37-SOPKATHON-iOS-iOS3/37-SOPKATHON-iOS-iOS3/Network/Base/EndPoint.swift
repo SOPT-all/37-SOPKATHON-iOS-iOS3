@@ -10,37 +10,37 @@ import Foundation
 // TODO: 예시 엔드포인트입니다. 나중에 명세서 나오면 수정하기
 
 enum EndPoint {
-    case products // 세부 카테고리에 해당하는 제품 조회
-    case productID(Int) // 제품 정보 조회
-    case detail(Int) ///제품 상세 조회
-    case hint(Int) // 제품 stylehint 조회
-    case reviews(Int) // 제품 리뷰 조회
+    case diarys // 일기 작성
+    case diarysEmotion(Int) // 이모지를 눌러 카운트 증가
+    case diarysList(Int) /// 일기 목록 조회
+    case diarysRandom // 다른 사용자 일기 목록 조회
+    // TODO: AI 선택 주제 get 추가
     
     var requestType: HTTPMethodType {
         switch self {
-        case .products, .productID, .detail, .hint, .reviews:
+        case .diarys, .diarysEmotion:
+            return .post
+        case .diarysList, .diarysRandom:
             return .get
         }
     }
     
     var url: String {
         switch self {
-        case .products:
-            return "/api/v1/products"
-        case .productID(let productId):
-            return "/api/v1/products/\(productId)"
-        case .detail(let productId):
-            return "/api/v1/products/\(productId)/details"
-        case .hint(let productId):
-            return "/api/v1/products/\(productId)/hints"
-        case .reviews(let productId):
-            return "/api/v1/products/\(productId)/reviews"
+        case .diarys:
+            return "/api/v1/diarys"
+        case .diarysEmotion(let id):
+            return "/api/v1/diarys/\(id)/emotion"
+        case .diarysList(let userID):
+            return "/api/v1/diarys/1"
+        case .diarysRandom:
+            return "/api/v1/diarys/random"
         }
     }
     
     var header: [String: String] {
         switch self {
-        case .products, .productID, .detail, .hint, .reviews:
+        case .diarys, .diarysEmotion, .diarysList, .diarysRandom:
             return HeaderType.basic.value
         }
     }
