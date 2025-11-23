@@ -16,7 +16,7 @@
 | [이나연(Lead)](https://github.com/y-eonee)| [공수민](https://github.com/sum130) | [이진재](https://github.com/LJIN24) | [한현서](https://github.com/hyunseo-han) |
 | --- | --- | --- | --- |
 | <p align="center"><img src="https://github.com/y-eonee.png" width="260"/></p> |  <p align="center"> <img src="https://github.com/sum130.png" width="260"/></p>  | <p align="center"><img src="https://github.com/LJIN24.png" width="260"/></p> | <p align="center"><img src="https://github.com/hyunseo-han.png" width="260"/></p> |
-| <p align="center"> 홈, 작성하기 </p> | <p align="center"> 메아리 받기, 답장 상세보기 </p> | <p align="center"> 내가 작성한 글 모아보기 </p> | <p align="center"> 답장 상세보기 </p> |
+| <p align="center"> 홈, 작성하기 뷰 구현, 일기 작성, 추천주제받기 api 연결  </p> | <p align="center"> 메아리 받기 뷰 구현, 반응 보내기 api 연결 </p> | <p align="center"> 내가 작성한 글 모아보기, 보관함 api 연결 </p> | <p align="center"> 상대방 일기 뷰 구현, 상대방 일기 받아오기 api 구현 </p> |
 
 <br />
 
